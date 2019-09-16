@@ -50,7 +50,7 @@ window.renderStatistics = function (ctx, players, times) {
       ctx.fillStyle = 'rgba(255, 0, 0, 1';
     } else {
       ctx.fillStyle = 'hsl(240, ' + Math.floor(Math.random() * 101) + '%, 50%)';
-    };
+    }
 
     ctx.fillRect(STAT_X + BIG_OFFSET + (BAR_WIDTH + BIG_OFFSET) * i, STAT_HEIGHT + STAT_Y - NAME_HEIGHT, BAR_WIDTH, (-barHeight * times[i]) / maxTime + RESULT_OFFSET);
   }
