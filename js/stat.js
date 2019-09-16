@@ -15,7 +15,7 @@ var barHeight = STAT_HEIGHT - CONGRATULATIONS_HEIGHT - NAME_HEIGHT;
 var drawStat = function (ctx, x, y, color) {
   ctx.fillStyle = color;
   ctx.fillRect(x, y, STAT_WIDTH, STAT_HEIGHT);
-}
+};
 
 var getMaxElement = function (arr) {
   var maxElement = arr[0];
@@ -27,7 +27,7 @@ var getMaxElement = function (arr) {
   }
 
   return maxElement;
-}
+};
 
 window.renderStatistics = function (ctx, players, times) {
   drawStat(ctx, STAT_X + OFFSET, STAT_Y + OFFSET, 'rgba(0, 0, 0, 0.7)');
@@ -45,9 +45,13 @@ window.renderStatistics = function (ctx, players, times) {
     ctx.fillText(players[i], STAT_X + BIG_OFFSET + (BAR_WIDTH + BIG_OFFSET) * i, STAT_Y + STAT_HEIGHT - OFFSET * 2);
     ctx.fillText(Math.floor(times[i]), STAT_X + BIG_OFFSET + (BAR_WIDTH + BIG_OFFSET) * i, STAT_Y + STAT_HEIGHT - NAME_HEIGHT - (barHeight * times[i] / maxTime));
 
-    //определение цвета гистограммы
-    players[i] === 'Вы' ? ctx.fillStyle = 'rgba(255, 0, 0, 1' : ctx.fillStyle = 'hsl(240, ' + Math.floor(Math.random() * 101) + '%, 50%)';
+    //  определение цвета гистограммы
+    if (players[i] === 'Вы') {
+      ctx.fillStyle = 'rgba(255, 0, 0, 1';
+    } else {
+      ctx.fillStyle = 'hsl(240, ' + Math.floor(Math.random() * 101) + '%, 50%)';
+    };
 
     ctx.fillRect(STAT_X + BIG_OFFSET + (BAR_WIDTH + BIG_OFFSET) * i, STAT_HEIGHT + STAT_Y - NAME_HEIGHT, BAR_WIDTH, (-barHeight * times[i]) / maxTime + RESULT_OFFSET);
   }
-}
+};
