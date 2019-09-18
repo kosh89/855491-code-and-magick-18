@@ -27,7 +27,7 @@ var generateWizard = function (names, surnames, coat, eyes) {
 
 var wizards = [];
 
-for (var i = 0; i < 4; i++) {
+for (var k = 0; k < 4; k++) {
   wizards.push(generateWizard(wizardName, wizardSurname, wizardCoatColor, wizardEyesColor));
 }
 
@@ -47,7 +47,7 @@ var createWizardsNode = function (block, array) {
   for (var i = 0; i < array.length; i++) {
     block.appendChild(renderWizard(array[i]));
   }
-}
+};
 
 var fragment = document.createDocumentFragment();
 
