@@ -13,23 +13,27 @@ setupSimilar.classList.remove('hidden');
 var similarListElement = document.querySelector('.setup-similar-list');
 var similatWizardTemplate = document.querySelector('#similar-wizard-template').content.querySelector('.setup-similar-item');
 
-var wizardNames = ['Иван', 'Хуан Себастьян', 'Мария', 'Кристоф', 'Виктор', 'Юлия', 'Люпита', 'Вашингтон'];
-var wizardSurnames = ['да Марья', 'Верон', 'Мирабелла', 'Вальц', 'Онопко', 'Топольницкая', 'Нионго', 'Ирвинг'];
-var wizardCoatColors = ['rgb(101, 137, 164)', 'rgb(241, 43, 107)', 'rgb(146, 100, 161)', 'rgb(56, 159, 117)', 'rgb(215, 210, 55)', 'rgb(0, 0, 0)'];
-var wizardEyesColors = ['black', 'red', 'blue', 'yellow', 'green'];
-var fireballColors = ['#ee4830', '#30a8ee', '#5ce6c0', '#e848d5', '#e6e848'];
+var WIZARD_NAMES = ['Иван', 'Хуан Себастьян', 'Мария', 'Кристоф', 'Виктор', 'Юлия', 'Люпита', 'Вашингтон'];
+var WIZARD_SURNAMES = ['да Марья', 'Верон', 'Мирабелла', 'Вальц', 'Онопко', 'Топольницкая', 'Нионго', 'Ирвинг'];
+var WIZARD_COAT_COLORS = ['rgb(101, 137, 164)', 'rgb(241, 43, 107)', 'rgb(146, 100, 161)', 'rgb(56, 159, 117)', 'rgb(215, 210, 55)', 'rgb(0, 0, 0)'];
+var WIZARD_EYES_COLORS = ['black', 'red', 'blue', 'yellow', 'green'];
+var FIREBALL_COLORS = ['#ee4830', '#30a8ee', '#5ce6c0', '#e848d5', '#e6e848'];
 
 var getRandomInt = function (min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
+};
+
+var getRandomElementFromArray = function (array) {
+  return array[getRandomInt(0, array.length - 1)];
 };
 
 //  функция генерации объекта с параметрами мага
 var generateWizard = function (names, surnames, coat, eyes) {
   var wizardObj = {};
 
-  wizardObj.name = names[Math.floor(Math.random() * names.length)] + ' ' + surnames[Math.floor(Math.random() * surnames.length)];
-  wizardObj.coatColor = coat[Math.floor(Math.random() * coat.length)];
-  wizardObj.eyesColor = eyes[Math.floor(Math.random() * eyes.length)];
+  wizardObj.name = getRandomElementFromArray(names) + ' ' + getRandomElementFromArray(surnames);
+  wizardObj.coatColor = getRandomElementFromArray(coat);
+  wizardObj.eyesColor = getRandomElementFromArray(eyes);
 
   return wizardObj;
 };
@@ -37,7 +41,7 @@ var generateWizard = function (names, surnames, coat, eyes) {
 var wizards = [];
 
 for (var k = 0; k < 4; k++) {
-  wizards.push(generateWizard(wizardNames, wizardSurnames, wizardCoatColors, wizardEyesColors));
+  wizards.push(generateWizard(WIZARD_NAMES, WIZARD_SURNAMES, WIZARD_COAT_COLORS, WIZARD_EYES_COLORS));
 }
 
 //  функция создания узла и отрисовки мага по свойствам из объекта
@@ -97,7 +101,6 @@ setupClose.addEventListener('keydown', function (evt) {
 });
 
 setupOpen.addEventListener('click', showSetup);
-
 setupClose.addEventListener('click', closeSetup);
 
 //  изменение персонажа
@@ -105,25 +108,20 @@ var wizardCoat = setupWindow.querySelector('.setup-wizard .wizard-coat');
 var wizardEyes = setupWindow.querySelector('.setup-wizard .wizard-eyes');
 var fireball = setupWindow.querySelector('.setup-fireball-wrap');
 
-//  выбираем случайный цвет из массива цветов
-var getColor = function (colorArray) {
-  return colorArray[getRandomInt(0, colorArray.length - 1)];
-};
-
 var changeCoatColor = function () {
-  var coatColor = getColor(wizardCoatColors);
+  var coatColor = getRandomElementFromArray(WIZARD_COAT_COLORS);
   wizardCoat.style.fill = coatColor;
   setupWindow.querySelector('input[name="coat-color"]').value = coatColor;
 };
 
 var changeEyesColor = function () {
-  var eyesColor = getColor(wizardEyesColors);
+  var eyesColor = getRandomElementFromArray(WIZARD_EYES_COLORS);
   wizardEyes.style.fill = eyesColor;
   setupWindow.querySelector('input[name="eyes-color"]').value = eyesColor;
 };
 
 var changeFireballColor = function () {
-  var fireballColor = getColor(fireballColors);
+  var fireballColor = getRandomElementFromArray(FIREBALL_COLORS);
   fireball.style.backgroundColor = fireballColor;
   setupWindow.querySelector('input[name="fireball-color"]').value = fireballColor;
 };
