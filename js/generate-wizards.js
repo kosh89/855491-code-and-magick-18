@@ -1,6 +1,8 @@
 'use strict';
 
 (function () {
+  var WIZARDS_COUNT = 4;
+
   window.generateWizards = {
     WIZARD_COAT_COLORS: ['rgb(101, 137, 164)', 'rgb(241, 43, 107)', 'rgb(146, 100, 161)', 'rgb(56, 159, 117)', 'rgb(215, 210, 55)', 'rgb(0, 0, 0)'],
     WIZARD_EYES_COLORS: ['black', 'red', 'blue', 'yellow', 'green']
@@ -25,7 +27,6 @@
 
   //  функция заполнения блока dom-элементами на основе массива
   var createWizardsNode = function (block, array) {
-    var WIZARDS_COUNT = 4;
     for (var i = 0; i < WIZARDS_COUNT; i++) {
       block.appendChild(renderWizard(window.utils.getRandomElementFromArray(array)));
     }

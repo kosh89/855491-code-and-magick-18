@@ -1,8 +1,7 @@
 'use strict';
 
 (function () {
-  var SAVE_URL = 'https://js.dump.academy/code-and-magick';
-  var SEND_URL = 'https://js.dump.academy/code-and-magick/data';
+  var API_URL = 'https://js.dump.academy/code-and-magick/';
 
   window.backend = {
     load: function (onLoad, onError) {
@@ -31,7 +30,7 @@
 
       xhr.timeout = 10000;
 
-      xhr.open('GET', SEND_URL);
+      xhr.open('GET', API_URL + 'data');
       xhr.send();
     },
 
@@ -61,7 +60,7 @@
 
       xhr.timeout = 10000;
 
-      xhr.open('POST', SAVE_URL);
+      xhr.open('POST', API_URL);
       xhr.send(data);
     }
   };
