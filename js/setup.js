@@ -6,9 +6,6 @@
   var SETUP_X = '50%';
   var SETUP_Y = '80px';
 
-  var FIREBALL_COLORS = ['#ee4830', '#30a8ee', '#5ce6c0', '#e848d5', '#e6e848'];
-
-
   //  выставляем элемент по указанным координатам
   var setElementPosition = function (elem, x, y) {
     elem.style.top = y;
@@ -54,33 +51,6 @@
 
   setupOpen.addEventListener('click', showSetup);
   setupClose.addEventListener('click', closeSetup);
-
-  //  изменение персонажа
-  var wizardCoat = window.utils.setupWindow.querySelector('.setup-wizard .wizard-coat');
-  var wizardEyes = window.utils.setupWindow.querySelector('.setup-wizard .wizard-eyes');
-  var fireball = window.utils.setupWindow.querySelector('.setup-fireball-wrap');
-
-  var changeCoatColor = function () {
-    var coatColor = window.utils.getRandomElementFromArray(window.generateWizards.WIZARD_COAT_COLORS);
-    wizardCoat.style.fill = coatColor;
-    window.utils.setupWindow.querySelector('input[name="coat-color"]').value = coatColor;
-  };
-
-  var changeEyesColor = function () {
-    var eyesColor = window.utils.getRandomElementFromArray(window.generateWizards.WIZARD_EYES_COLORS);
-    wizardEyes.style.fill = eyesColor;
-    window.utils.setupWindow.querySelector('input[name="eyes-color"]').value = eyesColor;
-  };
-
-  var changeFireballColor = function () {
-    var fireballColor = window.utils.getRandomElementFromArray(FIREBALL_COLORS);
-    fireball.style.backgroundColor = fireballColor;
-    window.utils.setupWindow.querySelector('input[name="fireball-color"]').value = fireballColor;
-  };
-
-  wizardCoat.addEventListener('click', changeCoatColor);
-  wizardEyes.addEventListener('click', changeEyesColor);
-  fireball.addEventListener('click', changeFireballColor);
 
   //  перетаскивание окна
   var upload = window.utils.setupWindow.querySelector('.upload');
