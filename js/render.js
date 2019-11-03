@@ -1,15 +1,15 @@
 'use strict';
 
 (function () {
-  var setupSimilar = window.utils.setupWindow.querySelector('.setup-similar');
-  setupSimilar.classList.remove('hidden');
+  var setupSimilarElement = window.utils.setupWindowElement.querySelector('.setup-similar');
+  setupSimilarElement.classList.remove('hidden');
 
   var similarListElement = document.querySelector('.setup-similar-list');
-  var similatWizardTemplate = document.querySelector('#similar-wizard-template').content.querySelector('.setup-similar-item');
+  var similarWizardTemplateElement = document.querySelector('#similar-wizard-template').content.querySelector('.setup-similar-item');
 
   //  функция создания узла и отрисовки мага по свойствам из объекта
   var renderWizard = function (wizardObject) {
-    var wizardElement = similatWizardTemplate.cloneNode(true);
+    var wizardElement = similarWizardTemplateElement.cloneNode(true);
 
     wizardElement.querySelector('.setup-similar-label').textContent = wizardObject.name;
     wizardElement.querySelector('.wizard-coat').style.fill = wizardObject.colorCoat;
@@ -33,9 +33,6 @@
     createWizardsNode(fragment, wizards);
     similarListElement.appendChild(fragment);
 
-    setupSimilar.classList.remove('hidden');
+    setupSimilarElement.classList.remove('hidden');
   };
-
-  //  обработчик успешной загрузки данных с сервера
-
 }());

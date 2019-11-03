@@ -53,16 +53,17 @@
     updateWizards();
   });
 
-  var fireball = window.utils.setupWindow.querySelector('.setup-fireball-wrap');
+  var fireballElement = window.utils.setupWindowElement.querySelector('.setup-fireball-wrap');
 
   var changeFireballColor = function () {
     var fireballColorElement = window.utils.getRandomElementFromArray(window.wizard.FIREBALL_COLORS);
-    fireball.style.backgroundColor = fireballColorElement;
-    window.utils.setupWindow.querySelector('input[name="fireball-color"]').value = fireballColorElement;
+    fireballElement.style.backgroundColor = fireballColorElement;
+    window.utils.setupWindowElement.querySelector('input[name="fireball-color"]').value = fireballColorElement;
   };
 
-  fireball.addEventListener('click', changeFireballColor);
+  fireballElement.addEventListener('click', changeFireballColor);
 
+  //  обработчик успешной загрузки данных с сервера
   var loadSuccessHandler = function (data) {
     wizards = data;
     updateWizards();
@@ -70,7 +71,7 @@
 
   //  обработчик успешной отправки данных на сервер
   var saveSuccessHandler = function () {
-    window.utils.setupWindow.classList.add('hidden');
+    window.utils.setupWindowElement.classList.add('hidden');
   };
 
   //  обработчик ошибок при загрузке/отправке данных
@@ -88,12 +89,12 @@
 
   window.backend.load(loadSuccessHandler, errorHandler);
 
-  var form = document.querySelector('.setup-wizard-form');
+  var formElement = document.querySelector('.setup-wizard-form');
 
   //  отправка формы
-  form.addEventListener('submit', function (evt) {
+  formElement.addEventListener('submit', function (evt) {
     evt.preventDefault();
 
-    window.backend.save(new FormData(form), saveSuccessHandler, errorHandler);
+    window.backend.save(new FormData(formElement), saveSuccessHandler, errorHandler);
   });
 })();

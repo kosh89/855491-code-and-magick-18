@@ -1,8 +1,8 @@
 'use strict';
 
 (function () {
-  var setupOpen = document.querySelector('.setup-open');
-  var setupClose = window.utils.setupWindow.querySelector('.setup-close');
+  var setupOpenElement = document.querySelector('.setup-open');
+  var setupCloseElement = window.utils.setupWindowElement.querySelector('.setup-close');
   var SETUP_X = '50%';
   var SETUP_Y = '80px';
 
@@ -14,16 +14,16 @@
 
   //  открываем окно настроек
   var showSetup = function () {
-    window.utils.setupWindow.classList.remove('hidden');
+    window.utils.setupWindowElement.classList.remove('hidden');
     document.addEventListener('keydown', onSetupEscPress);
 
     //  сброс положения окна настроек
-    setElementPosition(window.utils.setupWindow, SETUP_X, SETUP_Y);
+    setElementPosition(window.utils.setupWindowElement, SETUP_X, SETUP_Y);
   };
 
   //  закрываем окно настройки
   var closeSetup = function () {
-    window.utils.setupWindow.classList.add('hidden');
+    window.utils.setupWindowElement.classList.add('hidden');
     document.removeEventListener('keydown', onSetupEscPress);
   };
 
@@ -37,25 +37,25 @@
     }
   };
 
-  setupOpen.addEventListener('keydown', function (evt) {
+  setupOpenElement.addEventListener('keydown', function (evt) {
     if (evt.keyCode === window.utils.ENTER_CODE) {
       showSetup();
     }
   });
 
-  setupClose.addEventListener('keydown', function (evt) {
+  setupCloseElement.addEventListener('keydown', function (evt) {
     if (evt.keyCode === window.utils.ENTER_CODE) {
       closeSetup();
     }
   });
 
-  setupOpen.addEventListener('click', showSetup);
-  setupClose.addEventListener('click', closeSetup);
+  setupOpenElement.addEventListener('click', showSetup);
+  setupCloseElement.addEventListener('click', closeSetup);
 
   //  перетаскивание окна
-  var upload = window.utils.setupWindow.querySelector('.upload');
+  var uploadElement = window.utils.setupWindowElement.querySelector('.upload');
 
-  upload.addEventListener('mousedown', function (evt) {
+  uploadElement.addEventListener('mousedown', function (evt) {
     evt.preventDefault();
 
     var startCoords = {
@@ -80,8 +80,8 @@
         y: moveEvt.clientY
       };
 
-      window.utils.setupWindow.style.top = (window.utils.setupWindow.offsetTop - shift.y) + 'px';
-      window.utils.setupWindow.style.left = (window.utils.setupWindow.offsetLeft - shift.x) + 'px';
+      window.utils.setupWindowElement.style.top = (window.utils.setupWindowElement.offsetTop - shift.y) + 'px';
+      window.utils.setupWindowElement.style.left = (window.utils.setupWindowElement.offsetLeft - shift.x) + 'px';
     };
 
     var onMouseUp = function (upEvt) {
@@ -93,10 +93,10 @@
       if (moveFlag) {
         var onClickPreventDefault = function (clickEvt) {
           clickEvt.preventDefault();
-          upload.removeEventListener('click', onClickPreventDefault);
+          uploadElement.removeEventListener('click', onClickPreventDefault);
         };
 
-        upload.addEventListener('click', onClickPreventDefault);
+        uploadElement.addEventListener('click', onClickPreventDefault);
       }
     };
 

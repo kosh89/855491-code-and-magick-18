@@ -14,13 +14,13 @@
     FIREBALL_COLORS: ['#ee4830', '#30a8ee', '#5ce6c0', '#e848d5', '#e6e848'],
   };
 
-  var wizardCoatElement = window.utils.setupWindow.querySelector('.setup-wizard .wizard-coat');
-  var wizardEyesElement = window.utils.setupWindow.querySelector('.setup-wizard .wizard-eyes');
+  var wizardCoatElement = window.utils.setupWindowElement.querySelector('.setup-wizard .wizard-coat');
+  var wizardEyesElement = window.utils.setupWindowElement.querySelector('.setup-wizard .wizard-eyes');
 
   wizardCoatElement.addEventListener('click', function () {
     var coatColor = window.utils.getRandomElementFromArray(WIZARD_COAT_COLORS);
     wizardCoatElement.style.fill = coatColor;
-    window.utils.setupWindow.querySelector('input[name="coat-color"]').value = coatColor;
+    window.utils.setupWindowElement.querySelector('input[name="coat-color"]').value = coatColor;
 
     wizard.onCoatChange(coatColor);
   });
@@ -28,7 +28,7 @@
   wizardEyesElement.addEventListener('click', function () {
     var eyesColor = window.utils.getRandomElementFromArray(WIZARD_EYES_COLORS);
     wizardEyesElement.style.fill = eyesColor;
-    window.utils.setupWindow.querySelector('input[name="eyes-color"]').value = eyesColor;
+    window.utils.setupWindowElement.querySelector('input[name="eyes-color"]').value = eyesColor;
 
     wizard.onEyesChange(eyesColor);
   });
