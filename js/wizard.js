@@ -10,8 +10,7 @@
     },
     onEyesChange: function (color) {
       return color;
-    },
-    FIREBALL_COLORS: ['#ee4830', '#30a8ee', '#5ce6c0', '#e848d5', '#e6e848'],
+    }
   };
 
   var wizardCoatElement = window.utils.setupWindowElement.querySelector('.setup-wizard .wizard-coat');

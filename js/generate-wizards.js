@@ -1,7 +1,7 @@
 'use strict';
 
 (function () {
-
+  var FIREBALL_COLORS = ['#ee4830', '#30a8ee', '#5ce6c0', '#e848d5', '#e6e848'];
 
   //  переменные для сохранения текущего цвета мантии и глаз
   var coatColorTemp;
@@ -56,7 +56,7 @@
   var fireballElement = window.utils.setupWindowElement.querySelector('.setup-fireball-wrap');
 
   var changeFireballColor = function () {
-    var fireballColorElement = window.utils.getRandomElementFromArray(window.wizard.FIREBALL_COLORS);
+    var fireballColorElement = window.utils.getRandomElementFromArray(FIREBALL_COLORS);
     fireballElement.style.backgroundColor = fireballColorElement;
     window.utils.setupWindowElement.querySelector('input[name="fireball-color"]').value = fireballColorElement;
   };

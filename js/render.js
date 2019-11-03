@@ -1,6 +1,8 @@
 'use strict';
 
 (function () {
+  var SIMILAR_WIZARDS_COUNT = 4;
+
   var setupSimilarElement = window.utils.setupWindowElement.querySelector('.setup-similar');
   setupSimilarElement.classList.remove('hidden');
 
@@ -20,9 +22,8 @@
 
   //  функция заполнения блока dom-элементами на основе массива
   var createWizardsNode = function (block, array) {
-    var takeNumber = array.length > 4 ? 4 : array.length;
     similarListElement.innerHTML = '';
-    for (var i = 0; i < takeNumber; i++) {
+    for (var i = 0; i < SIMILAR_WIZARDS_COUNT; i++) {
       block.appendChild(renderWizard(array[i]));
     }
   };
