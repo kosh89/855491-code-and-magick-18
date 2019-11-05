@@ -10,6 +10,18 @@
   //  сюда сохраним данные, полученные с сервера
   var wizards = [];
 
+  window.generateWizards = {
+    onCoatChange: window.debounce(function (color) {
+      coatColorTemp = color;
+      updateWizards();
+    }),
+
+    onEyesChange: window.debounce(function (color) {
+      eyesColorTemp = color;
+      updateWizards();
+    })
+  };
+
   var getRank = function (wizard) {
     var rank = 0;
 
@@ -43,25 +55,15 @@
     }));
   };
 
-  window.wizard.onCoatChange = window.debounce(function (color) {
-    coatColorTemp = color;
-    updateWizards();
-  });
-
-  window.wizard.onEyesChange = window.debounce(function (color) {
-    eyesColorTemp = color;
-    updateWizards();
-  });
-
   var fireballElement = window.utils.setupWindowElement.querySelector('.setup-fireball-wrap');
 
-  var changeFireballColor = function () {
+  var onFireballElementClick = function () {
     var fireballColorElement = window.utils.getRandomElementFromArray(FIREBALL_COLORS);
     fireballElement.style.backgroundColor = fireballColorElement;
     window.utils.setupWindowElement.querySelector('input[name="fireball-color"]').value = fireballColorElement;
   };
 
-  fireballElement.addEventListener('click', changeFireballColor);
+  fireballElement.addEventListener('click', onFireballElementClick);
 
   //  обработчик успешной загрузки данных с сервера
   var loadSuccessHandler = function (data) {
@@ -91,10 +93,12 @@
 
   var formElement = document.querySelector('.setup-wizard-form');
 
-  //  отправка формы
-  formElement.addEventListener('submit', function (evt) {
+  var onFormElementSubmit = function (evt) {
     evt.preventDefault();
 
     window.backend.save(new FormData(formElement), saveSuccessHandler, errorHandler);
-  });
+  };
+
+  //  отправка формы
+  formElement.addEventListener('submit', onFormElementSubmit);
 })();

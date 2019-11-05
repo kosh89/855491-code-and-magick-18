@@ -13,7 +13,7 @@
   };
 
   //  открываем окно настроек
-  var showSetup = function () {
+  var onShowSetupElementClick = function () {
     window.utils.setupWindowElement.classList.remove('hidden');
     document.addEventListener('keydown', onSetupEscPress);
 
@@ -22,35 +22,39 @@
   };
 
   //  закрываем окно настройки
-  var closeSetup = function () {
+  var onCloseSetupElementClick = function () {
     window.utils.setupWindowElement.classList.add('hidden');
     document.removeEventListener('keydown', onSetupEscPress);
   };
 
-  //  нажатие ESC в ркне настройки
+  //  нажатие ESC в окне настройки
   var onSetupEscPress = function (evt) {
     if (evt.keyCode === window.utils.ESC_CODE) {
       if (evt.target.classList.contains('setup-user-name')) {
         return;
       }
-      closeSetup();
+      onCloseSetupElementClick();
     }
   };
 
-  setupOpenElement.addEventListener('keydown', function (evt) {
+  //  нажатие Enter по элементу открытия окна настроек
+  var onSetupOpenEnterPress = function (evt) {
     if (evt.keyCode === window.utils.ENTER_CODE) {
-      showSetup();
+      onShowSetupElementClick();
     }
-  });
+  };
 
-  setupCloseElement.addEventListener('keydown', function (evt) {
+  //  нажатие Enter по элементу закрытия окна настроек
+  var onSetupCloseEnterPress = function (evt) {
     if (evt.keyCode === window.utils.ENTER_CODE) {
-      closeSetup();
+      onCloseSetupElementClick();
     }
-  });
+  };
 
-  setupOpenElement.addEventListener('click', showSetup);
-  setupCloseElement.addEventListener('click', closeSetup);
+  setupOpenElement.addEventListener('click', onShowSetupElementClick);
+  setupOpenElement.addEventListener('keydown', onSetupOpenEnterPress);
+  setupCloseElement.addEventListener('click', onCloseSetupElementClick);
+  setupCloseElement.addEventListener('keydown', onSetupCloseEnterPress);
 
   //  перетаскивание окна
   var uploadElement = window.utils.setupWindowElement.querySelector('.upload');
