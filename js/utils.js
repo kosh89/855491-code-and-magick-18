@@ -7,7 +7,7 @@
   window.utils = {
     ESC_CODE: 27,
     ENTER_CODE: 13,
-    setupWindow: document.querySelector('.setup'),
+    setupWindowElement: document.querySelector('.setup'),
 
     getRandomElementFromArray: function (array) {
       return array[getRandomInt(0, array.length - 1)];

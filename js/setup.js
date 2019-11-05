@@ -1,13 +1,10 @@
 'use strict';
 
 (function () {
-  var setupOpen = document.querySelector('.setup-open');
-  var setupClose = window.utils.setupWindow.querySelector('.setup-close');
+  var setupOpenElement = document.querySelector('.setup-open');
+  var setupCloseElement = window.utils.setupWindowElement.querySelector('.setup-close');
   var SETUP_X = '50%';
   var SETUP_Y = '80px';
-
-  var FIREBALL_COLORS = ['#ee4830', '#30a8ee', '#5ce6c0', '#e848d5', '#e6e848'];
-
 
   //  выставляем элемент по указанным координатам
   var setElementPosition = function (elem, x, y) {
@@ -16,76 +13,53 @@
   };
 
   //  открываем окно настроек
-  var showSetup = function () {
-    window.utils.setupWindow.classList.remove('hidden');
+  var onShowSetupElementClick = function () {
+    window.utils.setupWindowElement.classList.remove('hidden');
     document.addEventListener('keydown', onSetupEscPress);
 
     //  сброс положения окна настроек
-    setElementPosition(window.utils.setupWindow, SETUP_X, SETUP_Y);
+    setElementPosition(window.utils.setupWindowElement, SETUP_X, SETUP_Y);
   };
 
   //  закрываем окно настройки
-  var closeSetup = function () {
-    window.utils.setupWindow.classList.add('hidden');
+  var onCloseSetupElementClick = function () {
+    window.utils.setupWindowElement.classList.add('hidden');
     document.removeEventListener('keydown', onSetupEscPress);
   };
 
-  //  нажатие ESC в ркне настройки
+  //  нажатие ESC в окне настройки
   var onSetupEscPress = function (evt) {
     if (evt.keyCode === window.utils.ESC_CODE) {
       if (evt.target.classList.contains('setup-user-name')) {
         return;
       }
-      closeSetup();
+      onCloseSetupElementClick();
     }
   };
 
-  setupOpen.addEventListener('keydown', function (evt) {
+  //  нажатие Enter по элементу открытия окна настроек
+  var onSetupOpenEnterPress = function (evt) {
     if (evt.keyCode === window.utils.ENTER_CODE) {
-      showSetup();
+      onShowSetupElementClick();
     }
-  });
+  };
 
-  setupClose.addEventListener('keydown', function (evt) {
+  //  нажатие Enter по элементу закрытия окна настроек
+  var onSetupCloseEnterPress = function (evt) {
     if (evt.keyCode === window.utils.ENTER_CODE) {
-      closeSetup();
+      onCloseSetupElementClick();
     }
-  });
-
-  setupOpen.addEventListener('click', showSetup);
-  setupClose.addEventListener('click', closeSetup);
-
-  //  изменение персонажа
-  var wizardCoat = window.utils.setupWindow.querySelector('.setup-wizard .wizard-coat');
-  var wizardEyes = window.utils.setupWindow.querySelector('.setup-wizard .wizard-eyes');
-  var fireball = window.utils.setupWindow.querySelector('.setup-fireball-wrap');
-
-  var changeCoatColor = function () {
-    var coatColor = window.utils.getRandomElementFromArray(window.generateWizards.WIZARD_COAT_COLORS);
-    wizardCoat.style.fill = coatColor;
-    window.utils.setupWindow.querySelector('input[name="coat-color"]').value = coatColor;
   };
 
-  var changeEyesColor = function () {
-    var eyesColor = window.utils.getRandomElementFromArray(window.generateWizards.WIZARD_EYES_COLORS);
-    wizardEyes.style.fill = eyesColor;
-    window.utils.setupWindow.querySelector('input[name="eyes-color"]').value = eyesColor;
-  };
-
-  var changeFireballColor = function () {
-    var fireballColor = window.utils.getRandomElementFromArray(FIREBALL_COLORS);
-    fireball.style.backgroundColor = fireballColor;
-    window.utils.setupWindow.querySelector('input[name="fireball-color"]').value = fireballColor;
-  };
-
-  wizardCoat.addEventListener('click', changeCoatColor);
-  wizardEyes.addEventListener('click', changeEyesColor);
-  fireball.addEventListener('click', changeFireballColor);
+  setupOpenElement.addEventListener('click', onShowSetupElementClick);
+  setupOpenElement.addEventListener('keydown', onSetupOpenEnterPress);
+  setupCloseElement.addEventListener('click', onCloseSetupElementClick);
+  setupCloseElement.addEventListener('keydown', onSetupCloseEnterPress);
 
   //  перетаскивание окна
-  var upload = window.utils.setupWindow.querySelector('.upload');
+  var uploadElement = window.utils.setupWindowElement.querySelector('.upload');
 
-  upload.addEventListener('mousedown', function (evt) {
+  uploadElement.addEventListener('mousedown', function (evt) {
     evt.preventDefault();
 
     var startCoords = {
@@ -110,8 +84,8 @@
         y: moveEvt.clientY
       };
 
-      window.utils.setupWindow.style.top = (window.utils.setupWindow.offsetTop - shift.y) + 'px';
-      window.utils.setupWindow.style.left = (window.utils.setupWindow.offsetLeft - shift.x) + 'px';
+      window.utils.setupWindowElement.style.top = (window.utils.setupWindowElement.offsetTop - shift.y) + 'px';
+      window.utils.setupWindowElement.style.left = (window.utils.setupWindowElement.offsetLeft - shift.x) + 'px';
     };
 
     var onMouseUp = function (upEvt) {
@@ -123,10 +97,10 @@
       if (moveFlag) {
         var onClickPreventDefault = function (clickEvt) {
           clickEvt.preventDefault();
-          upload.removeEventListener('click', onClickPreventDefault);
+          uploadElement.removeEventListener('click', onClickPreventDefault);
         };
 
-        upload.addEventListener('click', onClickPreventDefault);
+        uploadElement.addEventListener('click', onClickPreventDefault);
       }
     };
 
